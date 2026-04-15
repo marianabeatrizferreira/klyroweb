@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Klyro web</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+  <img src="assets/logoKlyro.png" class="logo">
+  <nav>
+    <a href="index.html">Início</a>
+    <a href="index.html">Serviços</a>
+    <a href="projects.html">Projetos</a>
+     <a href="https://wa.me/5531986990770?text=Olá,%20vim%20pelo%20site%20e%20quero%20um%20orçamento">Contato</a>
+  </nav>
+</header>
+
+<section class="projects-page">
+  <h1 class="reveal">Meus Projetos</h1>
+  <p class="reveal">Experiências digitais que desenvolvi</p>
+
+  <div class="projects-grid">
+
+    <div class="project-card reveal" onclick="openModal('videos/devBurguerVideo.mp4')">
+      <video src="videos/devBurguerVideo.mp4" muted loop></video>
+      <div class="overlay">Ver Projeto</div>
+    </div>
+
+    <div class="project-card reveal" onclick="openModal('videos/snakeVideo.mp4')">
+      <video src="videos/snakeVideo.mp4" muted loop></video>
+      <div class="overlay">Ver Projeto</div>
+    </div>
+
+    <div class="project-card reveal" onclick="openModal('videos/TrancistaSite.mp4')">
+      <video src="videos/TrancistaSite.mp4" muted loop></video>
+      <div class="overlay">Ver Projeto</div>
+    </div>
+
+    <div class="project-card reveal" onclick="openModal('videos/advocaciaSite.mp4')">
+      <video src="videos/advocaciaSite.mp4" muted loop></video>
+      <div class="overlay">Ver Projeto</div>
+    </div>
+
+  </div>
+</section>
+
+
+<div id="modal" class="modal">
+  <span class="close" onclick="closeModal()">×</span>
+  <video id="modalVideo" controls autoplay></video>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
