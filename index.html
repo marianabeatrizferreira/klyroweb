@@ -1,74 +1,268 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Klyro</title>
-  <link rel="icon" type="image/png" href="assets/iconKlyro.png">
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+  <title>KLYRO WEB</title>
+  <link rel="shortcut icon" href="assets/iconKlyro.png" type="image/x-icon">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&family=Unbounded:wght@400;700;900&family=Bebas+Neue&display=swap"
+    rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css" />
 </head>
+
 <body>
-    <canvas id="bgCanvas"></canvas>
 
-  <div id="preloader">
-  <img src="assets/logoKlyro.png" class="preloader-logo" alt="Klyro">
-</div>
+  <div class="loader" id="loader">
+    <div class="loader-word">KL<span>Y</span>RO</div>
+    <div class="loader-bar"><span></span></div>
+  </div>
 
+  <div class="page-wipe" id="pageWipe"></div>
+  <div class="grain"></div>
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-follower" id="cursorFollower"></div>
 
-  <header>
-    <img src="assets/logoKlyro.png" class="logo">
-    <nav>
-      <a href="#">Início</a>
-      <a onclick="scrollToSection()" style="cursor: pointer;">Serviços</a>
-      <a href="projects.html">Projetos</a>
-      <a href="https://wa.me/5531994430084?text=Olá,%20vim%20pelo%20site%20e%20quero%20um%20orçamento">Contato</a>
+  <header class="nav">
+    <a href="#home" class="logo magnetic">KL<span>Y</span>RO</a>
+
+    <nav class="nav-links">
+      <a href="#vision" class="magnetic">Visão</a>
+      <a href="#projects" class="magnetic">Projetos</a>
+      <a href="#method" class="magnetic">Método</a>
+      <a href="#contact" class="magnetic">Contato</a>
     </nav>
+
+    <button class="menu magnetic" id="menuBtn">
+      <span></span><span></span>
+    </button>
   </header>
 
+  <div class="mobile-panel" id="mobilePanel">
+    <a href="#vision">Visão</a>
+    <a href="#projects">Projetos</a>
+    <a href="#method">Métodos</a>
+    <a href="#contact">Contato</a>
+  </div>
 
-  <section class="hero">
-    <div class="hero-text">
-      <h1>Criamos sites modernos, rápidos e profissionais</h1>
-      <p>Transformamos ideias em experiências digitais incríveis.</p>
-      <button onclick="scrollToSection()">Ver Serviços</button>
-    </div>
-  </section>
+  <main>
 
+    <section id="home" class="hero panel">
+      <div class="hero-noise-word">DIGITAL STUDIO</div>
 
-  <section class="services" id="services">
-    <h2>O que fazemos</h2>
+      <div class="hero-left">
+        <p class="tag reveal">PRESENÇA DE MARCA</p>
 
-    <div class="cards">
-      <div class="card">
-        <h3>Landing Pages</h3>
-        <p>Sites rápidos e focados em conversão.</p>
+        <h1 class="split-title reveal">
+          <span>SITES</span>
+          <span>QUE</span>
+          <span>FAZEM</span>
+          <span>MARCAS</span>
+          <span>CRESCEREM</span>
+        </h1>
+        <p class="lead reveal">
+          Criamos sites com estética forte, navegação marcante e estratégia para transformar visitantes em clientes.
+        </p>
+
+        <div class="hero-buttons reveal">
+          <a href="#projects" class="btn primary magnetic">Ver projetos</a>
+          <a href="#contact" class="btn outline magnetic">Pedir orçamento</a>
+        </div>
       </div>
 
-      <div class="card">
-        <h3>Sites Profissionais</h3>
-        <p>Design moderno e totalmente responsivo.</p>
+      <div class="hero-right">
+        <canvas id="threeScene"></canvas>
+
+        <div class="hud hud-a reveal">
+          <small>SINAL DE CONFIANÇA</small>
+          <strong>98%</strong>
+          <span>impacto visual</span>
+        </div>
+
+
+
+        <div class="scroll-cue">
+          <span></span>
+          scroll
+        </div>
+    </section>
+
+    <section class="marquee-section">
+      <div class="marquee">
+        <span>SITES ESTRATÉGICOS ✦ DESIGN DIGITAL ✦ LANDING PAGES ✦ CÓDIGO CRIATIVO ✦ EXPERIÊNCIAS MEMORÁVEIS ✦ </span>
+        <span>SITES ESTRATÉGICOS ✦ DESIGN DIGITAL ✦ LANDING PAGES ✦ CÓDIGO CRIATIVO ✦ EXPERIÊNCIAS MEMORÁVEIS ✦ </span>
+      </div>
+    </section>
+
+    <section id="vision" class="vision panel">
+      <div class="vision-grid">
+        <div>
+
+          <h2 class="big-text reveal">
+            O site não é vitrine. É o primeiro vendedor da sua marca.
+          </h2>
+        </div>
+
+        <div class="vision-card reveal">
+          <p>
+            A Klyro mistura design editorial, código criativo e experiência de navegação para criar páginas que não
+            parecem feitas no piloto automático.
+          </p>
+
+          <div class="mini-tags">
+            <span>estratégia</span>
+            <span>interface</span>
+            <span>Movimento</span>
+            <span>conversão</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects" class="projects panel">
+      <div class="section-top reveal">
+
+        <h2>Projetos que entram em cena.</h2>
       </div>
 
-      <div class="card">
-        <h3>Otimização</h3>
-        <p>Performance e SEO para destacar seu negócio.</p>
+      <div class="project-path">
+        <svg viewBox="0 0 1200 2200" preserveAspectRatio="none">
+          <path id="motionPath"
+            d="M600 0 C 160 360, 1040 520, 600 860 C 160 1200, 1040 1360, 600 1700 C 260 1950, 930 2050, 600 2200" />
+          <path id="motionPathFill"
+            d="M600 0 C 160 360, 1040 520, 600 860 C 160 1200, 1040 1360, 600 1700 C 260 1950, 930 2050, 600 2200" />
+        </svg>
+        <div class="path-orb" id="pathOrb"></div>
       </div>
-    </div>
-  </section>
+
+      <article class="case case-left reveal">
+        <div class="case-number">01</div>
+        <div class="case-media tilt">
+          <video autoplay muted loop playsinline src="videos/advocacia.mp4"></video>
+          <a class="corner-label" href="https://marinamarquesadv.com.br/">Marina Adv</a>
+        </div>
+        <div class="case-copy">
+          <h3>Advocacia com presença de autoridade.</h3>
+          <p>Visual sério, mensagem objetiva e contato rápido sem parecer página genérica.</p>
+        </div>
+      </article>
+
+      <article class="case case-right reveal">
+        <div class="case-number">02</div>
+        <div class="case-media tilt">
+          <video autoplay muted loop playsinline src="videos/videomaker.mp4"></video>
+          <a class="corner-label" href="https://isavideomaker.vercel.app/">Isa videomaker</a>
+        </div>
+        <div class="case-copy">
+          <h3>Portfólio com ritmo de trailer.</h3>
+          <p>Movimento, contraste e narrativa visual para vender serviço criativo sem textão.</p>
+        </div>
+      </article>
+
+      <article class="case case-left reveal">
+        <div class="case-number">03</div>
+        <div class="case-media tilt">
+          <video autoplay muted loop playsinline src="videos/TrancistaSite.mp4"></video>
+          <span class="corner-label">Braids</span>
+        </div>
+        <div class="case-copy">
+          <h3>Beleza com estética de editorial.</h3>
+          <p>Uma página para mostrar estilo, trabalhos, serviços e facilitar agenda.</p>
+        </div>
+      </article>
+    </section>
+
+    <section class="chaos panel">
+      <div class="sticker s1 reveal">WEB DESIGN</div>
+      <div class="sticker s2 reveal">MARCA</div>
+      <div class="sticker s3 reveal">CREATIVE CODE</div>
+      <div class="sticker s4 reveal">MOTION UI</div>
+
+      <h2 class="chaos-title reveal">
+        Menos molde.<br>
+        Mais presença.
+      </h2>
+
+      <p class="chaos-text reveal">
+        O objetivo é simples: quando alguém abre seu site, a primeira reação precisa ser “isso aqui é sério”.
+      </p>
+    </section>
+
+    <section id="method" class="method panel">
 
 
-  <section class="cta">
-    <h2>Pronto para ter um site incrível?</h2>
-    <a href="https://wa.me/5531994430084?text=Olá,%20vim%20pelo%20site%20e%20quero%20um%20orçamento" target="_blank">
-  <button>Fale conosco</button>
-</a>
-  </section>
+      <div class="method-grid">
+        <div class="method-item reveal">
+          <span>01</span>
+          <h3>Clareza</h3>
+          <p>Entendemos seu negócio e o que o site precisa resolver.</p>
+        </div>
 
+        <div class="method-item reveal">
+          <span>02</span>
+          <h3>Direção</h3>
+          <p>Criamos o caminho visual e estratégico, sem chute fashionista.</p>
+        </div>
+
+        <div class="method-item reveal">
+          <span>03</span>
+          <h3>Construção</h3>
+          <p>Design e desenvolvimento caminham juntos, sem Frankenstein digital.</p>
+        </div>
+
+        <div class="method-item reveal">
+          <span>04</span>
+          <h3>Lançamento</h3>
+          <p>Publicamos, ajustamos e deixamos pronto para receber pessoas.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="contact panel">
+      <div class="contact-copy reveal">
+
+        <h2>Vamos tirar seu site do modo invisível.</h2>
+
+      </div>
+
+      <form id="briefingForm" class="briefing reveal">
+        <input id="nome" placeholder="Nome" required />
+        <input id="negocio" placeholder="Área do negócio" required />
+
+        <select id="tipo">
+          <option>Landing Page</option>
+          <option>Site institucional</option>
+          <option>Portfólio</option>
+          <option>Redesign</option>
+          <option>Não sei ainda</option>
+        </select>
+
+        <select id="prazo">
+          <option>Sem pressa</option>
+          <option>Até 7 dias</option>
+          <option>Até 15 dias</option>
+          <option>Até 30 dias</option>
+        </select>
+
+        <textarea id="detalhes" placeholder="Conte o que você quer criar"></textarea>
+
+        <button class="magnetic" type="submit">Solicitar orçamento</button>
+      </form>
+    </section>
+
+  </main>
 
   <footer>
-    <p>© 2026 Klyro web</p>
+    <span>KLYRO © 2026</span>
+    <a href="#home">voltar ao topo</a>
   </footer>
 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
   <script src="script.js"></script>
 </body>
+
 </html>
