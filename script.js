@@ -235,7 +235,7 @@ Detalhes:
 ${$("#detalhes").value || "Ainda não descrevi."}
 `.trim();
 
-  window.open(`https://wa.me/5531986990770?text=${encodeURIComponent(msg)}`, "_blank");
+  window.open(`https://wa.me/5531994430084?text=${encodeURIComponent(msg)}`, "_blank");
 });
 
 function initThree() {
