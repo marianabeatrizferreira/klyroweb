@@ -1,270 +1,680 @@
 <!DOCTYPE html>
-<html lang="pt-br">
-
+<html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>KLYRO WEB</title>
-
-  <link rel="icon" type="image/png" href="/assets/iconKlyro.png">
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta
+    name="description"
+    content="Klyro.web cria experiências digitais autorais para marcas que precisam ser percebidas."
+  >
+  <title>Klyro.web — Experiências digitais autorais</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&family=Unbounded:wght@400;700;900&family=Bebas+Neue&display=swap"
-    rel="stylesheet">
-
-  <link rel="stylesheet" href="style.css" />
+    href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Manrope:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet"
+  >
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
 </head>
 
 <body>
+  <div class="noise" aria-hidden="true"></div>
 
-  <div class="loader" id="loader">
-    <div class="loader-word">KL<span>Y</span>RO</div>
-    <div class="loader-bar"><span></span></div>
+  <div class="page-progress" aria-hidden="true">
+    <span></span>
   </div>
 
-  <div class="page-wipe" id="pageWipe"></div>
-  <div class="grain"></div>
-  <div class="cursor" id="cursor"></div>
-  <div class="cursor-follower" id="cursorFollower"></div>
+  <header class="site-header">
+    <a class="logo" href="#inicio" aria-label="Klyro.web">
+      <span class="logo-symbol">K</span>
+      <span class="logo-name">klyro.web</span>
+    </a>
 
-  <header class="nav">
-    <a href="#home" class="logo magnetic">KL<span>Y</span>RO</a>
-
-    <nav class="nav-links">
-      <a href="#vision" class="magnetic">Visão</a>
-      <a href="#projects" class="magnetic">Projetos</a>
-      <a href="#method" class="magnetic">Método</a>
-      <a href="#contact" class="magnetic">Contato</a>
+    <nav class="desktop-menu" aria-label="Navegação principal">
+      <a href="#trabalhos">Trabalhos</a>
+      <a href="#visao">Visão</a>
+      <a href="#processo">Processo</a>
     </nav>
 
-    <button class="menu magnetic" id="menuBtn">
-      <span></span><span></span>
+    <a class="header-contact" href="#contato">
+      <span>Iniciar projeto</span>
+      <b>↗</b>
+    </a>
+
+    <button
+      class="menu-toggle"
+      type="button"
+      aria-label="Abrir menu"
+      aria-expanded="false"
+    >
+      <span></span>
+      <span></span>
     </button>
   </header>
 
-  <div class="mobile-panel" id="mobilePanel">
-    <a href="#vision">Visão</a>
-    <a href="#projects">Projetos</a>
-    <a href="#method">Métodos</a>
-    <a href="#contact">Contato</a>
+  <div class="mobile-menu" aria-hidden="true">
+    <div class="mobile-menu-inner">
+      <span class="mobile-index">Navegação</span>
+
+      <nav>
+        <a href="#inicio"><span>01</span>Início</a>
+        <a href="#trabalhos"><span>02</span>Trabalhos</a>
+        <a href="#visao"><span>03</span>Visão</a>
+        <a href="#processo"><span>04</span>Processo</a>
+        <a href="#contato"><span>05</span>Contato</a>
+      </nav>
+
+      <div class="mobile-menu-footer">
+        <a href="https://wa.me/5531994430084" target="_blank" rel="noopener">
+    (31) 9 9443-0084
+</a>
+        <span>Minas Gerais</span>
+      </div>
+    </div>
   </div>
 
   <main>
+    <section class="hero" id="inicio">
+      <div class="hero-top">
+        <span>Estúdio digital independente</span>
+        <span>Minas Gerais</span>
+        <span class="availability">
+          Disponível para novos projetos
+        </span>
+      </div>
 
-    <section id="home" class="hero panel">
-      <div class="hero-noise-word">DIGITAL STUDIO</div>
+      <div class="hero-copy">
+        <div class="hero-line hero-line-one">
+          <span class="hero-word">Seu site</span>
+          <small>
+            Design, estratégia<br>
+            e desenvolvimento
+          </small>
+        </div>
 
-      <div class="hero-left">
-        <p class="tag reveal">PRESENÇA DE MARCA</p>
+        <div class="hero-line hero-line-two">
+          <span class="hero-word hero-outline">já está</span>
+        </div>
 
-        <h1 class="split-title reveal">
-          <span>SITES</span>
-          <span>QUE</span>
-          <span>FAZEM</span>
-          <span>MARCAS</span>
-          <span>CRESCEREM</span>
-        </h1>
-        <p class="lead reveal">
-          Criamos sites com estética forte, navegação marcante e estratégia para transformar visitantes em clientes.
+        <div class="hero-line hero-line-three">
+          <span class="hero-word">dizendo</span>
+          <span class="hero-mark">✦</span>
+        </div>
+
+        <div class="hero-line hero-line-four">
+          <span class="hero-word hero-accent">alguma coisa.</span>
+        </div>
+      </div>
+
+      <div class="hero-bottom">
+        <p>
+          A questão não é apenas ter um site.
+          É saber o que ele faz alguém sentir, entender e decidir.
         </p>
 
-        <div class="hero-buttons reveal">
-          <a href="#projects" class="btn primary magnetic">Ver projetos</a>
-          <a href="#contact" class="btn outline magnetic">Pedir orçamento</a>
-        </div>
+        <a href="#trabalhos" class="scroll-link">
+          <span>Ver trabalhos</span>
+          <b>↓</b>
+        </a>
       </div>
 
-      <div class="hero-right">
-        <canvas id="threeScene"></canvas>
-
-        <div class="hud hud-a reveal">
-          <small>SINAL DE CONFIANÇA</small>
-          <strong>98%</strong>
-          <span>impacto visual</span>
-        </div>
-
-
-
-        <div class="scroll-cue">
-          <span></span>
-          scroll
-        </div>
-    </section>
-
-    <section class="marquee-section">
-      <div class="marquee">
-        <span>SITES ESTRATÉGICOS ✦ DESIGN DIGITAL ✦ LANDING PAGES ✦ CÓDIGO CRIATIVO ✦ EXPERIÊNCIAS MEMORÁVEIS ✦ </span>
-        <span>SITES ESTRATÉGICOS ✦ DESIGN DIGITAL ✦ LANDING PAGES ✦ CÓDIGO CRIATIVO ✦ EXPERIÊNCIAS MEMORÁVEIS ✦ </span>
+      <div class="hero-orbit" aria-hidden="true">
+        <span>KLYRO · DIGITAL · EXPERIENCE ·</span>
       </div>
     </section>
 
-    <section id="vision" class="vision panel">
-      <div class="vision-grid">
-        <div>
+    <section class="question-section" id="visao">
+      <div class="question-sticky">
+       
 
-          <h2 class="big-text reveal">
-            O site não é vitrine. É o primeiro vendedor da sua marca.
+        <div class="question-copy">
+          <p class="question-small">
+            Seu site pode estar funcionando.
+          </p>
+
+          <h2>
+            Mas ele está dizendo
+            <span>a coisa certa?</span>
           </h2>
         </div>
 
-        <div class="vision-card reveal">
+        <div class="question-foot">
           <p>
-            A Klyro mistura design editorial, código criativo e experiência de navegação para criar páginas que não
-            parecem feitas no piloto automático.
+            Presença digital não é ocupar espaço.
+            É construir percepção.
           </p>
+        </div>
+      </div>
 
-          <div class="mini-tags">
-            <span>estratégia</span>
-            <span>interface</span>
-            <span>Movimento</span>
-            <span>conversão</span>
+      <div class="question-panels">
+        <article class="question-panel">
+          <span>01</span>
+          <h3>Antes da estética, existe intenção.</h3>
+          <p>
+            Cada escolha precisa revelar alguma coisa sobre sua marca.
+            Cor, ritmo, texto, movimento e silêncio trabalham juntos.
+          </p>
+        </article>
+
+        <article class="question-panel">
+          <span>02</span>
+          <h3>Antes da conversão, existe confiança.</h3>
+          <p>
+            Ninguém compra porque um botão está bonito.
+            A decisão acontece quando tudo parece claro, coerente e seguro.
+          </p>
+        </article>
+
+        <article class="question-panel">
+          <span>03</span>
+          <h3>Antes do código, existe uma história.</h3>
+          <p>
+            A tecnologia entra depois.
+            Primeiro encontramos o que precisa ser dito e como isso deve ser percebido.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section class="work-intro" id="trabalhos">
+      <div class="work-intro-top">
+        <span class="section-label">portifólio</span>
+        <span>Projetos autorais </span>
+      </div>
+
+      <div class="work-intro-copy">
+        <h2>
+          Trabalhos que não
+          <span>pedem atenção.</span>
+          Eles conquistam.
+        </h2>
+
+        
+      </div>
+    </section>
+
+    <section class="project project-marina">
+  <div class="project-shell">
+    <div class="project-heading">
+      <div class="project-index">
+        <span>Projeto 01</span>
+        <span>Advocacia</span>
+      </div>
+
+      <h3>Marina Marques</h3>
+
+      <p>
+        Uma presença digital criada para transmitir segurança,
+        clareza e autoridade antes da primeira conversa.
+      </p>
+    </div>
+
+    <a
+      class="project-main-image"
+      href="https://marinamarquesadv.com.br"
+      target="_blank"
+      rel="noopener"
+      aria-label="Abrir projeto Marina Marques"
+    >
+      <video
+        class="project-video"
+        autoplay
+        muted
+        loop
+        playsinline
+        preload="metadata"
+      >
+        <source src="videos/advocacia.mp4" type="video/mp4">
+      </video>
+
+      <div class="project-video-overlay"></div>
+
+      <div class="project-video-top">
+        <span>Marina Marques</span>
+        <span>Advocacia</span>
+      </div>
+
+      <div class="project-video-bottom">
+        <span>Visitar projeto</span>
+        <span class="project-video-arrow">↗</span>
+      </div>
+    </a>
+
+    <div class="project-details">
+      <div>
+        <span>Desafio</span>
+        <p>
+          Posicionar uma atuação jurídica de forma contemporânea,
+          sem recorrer à estética fria e previsível do setor.
+        </p>
+      </div>
+
+      <div>
+        <span>Direção</span>
+        <p>
+          Elegância silenciosa, linguagem objetiva e uma identidade
+          construída para gerar confiança imediata.
+        </p>
+      </div>
+
+      <ul>
+        <li>Estratégia</li>
+        <li>Direção visual</li>
+        <li>UX/UI</li>
+        <li>Desenvolvimento</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="project project-isa">
+  <div class="project-shell">
+    <div class="project-heading">
+      <div class="project-index">
+        <span>Projeto 02</span>
+        <span>Audiovisual</span>
+      </div>
+
+      <h3>Isa Videomaker</h3>
+
+      <p>
+        Um portfólio construído com ritmo, contraste e movimento
+        para apresentar histórias sem transformar o trabalho em catálogo.
+      </p>
+    </div>
+
+    <a
+      class="project-main-image"
+      href="https://isavideomaker.vercel.app"
+      target="_blank"
+      rel="noopener"
+      aria-label="Abrir projeto Isa Videomaker"
+    >
+      <video
+        class="project-video"
+        autoplay
+        muted
+        loop
+        playsinline
+        preload="metadata"
+      >
+        <source src="videos//videomaker.mp4" type="video/mp4">
+      </video>
+
+      <div class="project-video-overlay"></div>
+
+      <div class="project-video-top">
+        <span>Isa Videomaker</span>
+        <span>Audiovisual</span>
+      </div>
+
+      <div class="project-video-bottom">
+        <span>Visitar projeto</span>
+        <span class="project-video-arrow">↗</span>
+      </div>
+    </a>
+
+    <div class="project-details">
+      <div>
+        <span>Desafio</span>
+        <p>
+          Criar uma experiência com linguagem cinematográfica,
+          sem comprometer clareza, velocidade ou navegação.
+        </p>
+      </div>
+
+      <div>
+        <span>Direção</span>
+        <p>
+          Tipografia expressiva, cortes editoriais e movimento aplicado
+          apenas onde contribui para a narrativa.
+        </p>
+      </div>
+
+      <ul>
+        <li>Portfólio</li>
+        <li>Direção criativa</li>
+        <li>Motion UI</li>
+        <li>Frontend</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="project project-braids">
+  <div class="project-shell">
+    <div class="project-heading">
+      <div class="project-index">
+        <span>Projeto 03</span>
+        <span>Beleza</span>
+      </div>
+
+      <h3>Braids Studio</h3>
+
+      <p>
+        Uma experiência editorial para valorizar técnica,
+        personalidade e desejo sem cair na linguagem genérica do segmento.
+      </p>
+    </div>
+
+    <a
+      class="project-main-image"
+      href="https://melaninabraids.vercel.app/"
+      aria-label="Abrir projeto Braids Studio"
+    >
+      <video
+        class="project-video"
+        autoplay
+        muted
+        loop
+        playsinline
+        preload="metadata"
+      >
+        <source src="videos/trancista.mp4" type="video/mp4">
+      </video>
+
+      <div class="project-video-overlay"></div>
+
+      <div class="project-video-top">
+        <span>Braids Studio</span>
+        <span>Beleza</span>
+      </div>
+
+      <div class="project-video-bottom">
+        <span>Ver projeto</span>
+        <span class="project-video-arrow">↗</span>
+      </div>
+    </a>
+
+    <div class="project-details">
+      <div>
+        <span>Desafio</span>
+        <p>
+          Traduzir técnica e personalidade em uma experiência
+          desejável, clara e fácil de navegar.
+        </p>
+      </div>
+
+      <div>
+        <span>Direção</span>
+        <p>
+          Contraste entre força e delicadeza, composição editorial
+          e foco absoluto na identidade do trabalho.
+        </p>
+      </div>
+
+      <ul>
+        <li>Brand experience</li>
+        <li>UX/UI</li>
+        <li>Direção visual</li>
+        <li>Conversão</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+    
+
+
+    <section class="process" id="processo">
+      <div class="process-head">
+    
+
+        <h2>
+          Sem fórmula pronta.
+          <span>Com método.</span>
+        </h2>
+
+        <p>
+          Um processo estruturado para encontrar a identidade certa,
+          não apenas uma aparência bonita.
+        </p>
+      </div>
+
+      <div class="process-list">
+        <article class="process-item">
+          <span class="process-number">01</span>
+
+          <div>
+            <h3>Imersão</h3>
+            <p>
+              Entendemos negócio, público, contexto e o que precisa mudar
+              na percepção da marca.
+            </p>
           </div>
-        </div>
+
+          <span class="process-arrow">↘</span>
+        </article>
+
+        <article class="process-item">
+          <span class="process-number">02</span>
+
+          <div>
+            <h3>Direção</h3>
+            <p>
+              Construímos conceito, linguagem visual, narrativa,
+              hierarquia e arquitetura da experiência.
+            </p>
+          </div>
+
+          <span class="process-arrow">↘</span>
+        </article>
+
+        <article class="process-item">
+          <span class="process-number">03</span>
+
+          <div>
+            <h3>Construção</h3>
+            <p>
+              Design e desenvolvimento evoluem juntos,
+              preservando a força da ideia até o produto final.
+            </p>
+          </div>
+
+          <span class="process-arrow">↘</span>
+        </article>
+
+        <article class="process-item">
+          <span class="process-number">04</span>
+
+          <div>
+            <h3>Refino</h3>
+            <p>
+              Ajustamos ritmo, responsividade, legibilidade,
+              performance e cada microinteração.
+            </p>
+          </div>
+
+          <span class="process-arrow">↘</span>
+        </article>
+
+        <article class="process-item">
+          <span class="process-number">05</span>
+
+          <div>
+            <h3>Lançamento</h3>
+            <p>
+              Publicamos, revisamos os detalhes finais
+              e deixamos tudo preparado para crescer.
+            </p>
+          </div>
+
+          <span class="process-arrow">↘</span>
+        </article>
       </div>
     </section>
 
-    <section id="projects" class="projects panel">
-      <div class="section-top reveal">
+    <section class="closing-statement">
 
-        <h2>Projetos que entram em cena.</h2>
+      <div class="closing-copy">
+        <p>Não entregamos apenas páginas.</p>
+
+        <h2>
+          Entregamos uma nova forma
+          de apresentar o seu negócio.
+        </h2>
       </div>
 
-      <div class="project-path">
-        <svg viewBox="0 0 1200 2200" preserveAspectRatio="none">
-          <path id="motionPath"
-            d="M600 0 C 160 360, 1040 520, 600 860 C 160 1200, 1040 1360, 600 1700 C 260 1950, 930 2050, 600 2200" />
-          <path id="motionPathFill"
-            d="M600 0 C 160 360, 1040 520, 600 860 C 160 1200, 1040 1360, 600 1700 C 260 1950, 930 2050, 600 2200" />
-        </svg>
-        <div class="path-orb" id="pathOrb"></div>
+      <div class="closing-list">
+        <span>Estratégia</span>
+        <span>Conteúdo</span>
+        <span>UX/UI</span>
+        <span>Direção visual</span>
+        <span>Desenvolvimento</span>
+        <span>Microinterações</span>
       </div>
-
-      <article class="case case-left reveal">
-        <div class="case-number">01</div>
-        <div class="case-media tilt">
-          <video autoplay muted loop playsinline src="videos/advocacia.mp4"></video>
-          <a class="corner-label" href="https://marinamarquesadv.com.br/">Marina Adv</a>
-        </div>
-        <div class="case-copy">
-          <h3>Advocacia com presença de autoridade.</h3>
-          <p>Visual sério, mensagem objetiva e contato rápido sem parecer página genérica.</p>
-        </div>
-      </article>
-
-      <article class="case case-right reveal">
-        <div class="case-number">02</div>
-        <div class="case-media tilt">
-          <video autoplay muted loop playsinline src="videos/videomaker.mp4"></video>
-          <a class="corner-label" href="https://isavideomaker.vercel.app/">Isa videomaker</a>
-        </div>
-        <div class="case-copy">
-          <h3>Portfólio com ritmo de trailer.</h3>
-          <p>Movimento, contraste e narrativa visual para vender serviço criativo sem textão.</p>
-        </div>
-      </article>
-
-      <article class="case case-left reveal">
-        <div class="case-number">03</div>
-        <div class="case-media tilt">
-          <video autoplay muted loop playsinline src="videos/TrancistaSite.mp4"></video>
-          <span class="corner-label">Braids</span>
-        </div>
-        <div class="case-copy">
-          <h3>Beleza com estética de editorial.</h3>
-          <p>Uma página para mostrar estilo, trabalhos, serviços e facilitar agenda.</p>
-        </div>
-      </article>
     </section>
 
-    <section class="chaos panel">
-      <div class="sticker s1 reveal">WEB DESIGN</div>
-      <div class="sticker s2 reveal">MARCA</div>
-      <div class="sticker s3 reveal">CREATIVE CODE</div>
-      <div class="sticker s4 reveal">MOTION UI</div>
+    <section class="contact" id="contato">
+  <div class="contact-top">
+    <span class="availability">Agenda aberta</span>
+  </div>
 
-      <h2 class="chaos-title reveal">
-        Menos molde.<br>
-        Mais presença.
+  <div class="contact-grid">
+    <div class="contact-copy">
+      <p>Sua marca já tem algo a dizer.</p>
+
+      <h2>
+        Vamos fazer
+        <span>alguém notar?</span>
       </h2>
 
-      <p class="chaos-text reveal">
-        O objetivo é simples: quando alguém abre seu site, a primeira reação precisa ser “isso aqui é sério”.
-      </p>
-    </section>
+      <div class="contact-direct">
+        <a href="https://wa.me/5531994430084" target="_blank" rel="noopener">
+    (31) 9 9443-0084
+</a>
 
-    <section id="method" class="method panel">
-
-
-      <div class="method-grid">
-        <div class="method-item reveal">
-          <span>01</span>
-          <h3>Clareza</h3>
-          <p>Entendemos seu negócio e o que o site precisa resolver.</p>
-        </div>
-
-        <div class="method-item reveal">
-          <span>02</span>
-          <h3>Direção</h3>
-          <p>Criamos o caminho visual e estratégico, sem chute fashionista.</p>
-        </div>
-
-        <div class="method-item reveal">
-          <span>03</span>
-          <h3>Construção</h3>
-          <p>Design e desenvolvimento caminham juntos, sem Frankenstein digital.</p>
-        </div>
-
-        <div class="method-item reveal">
-          <span>04</span>
-          <h3>Lançamento</h3>
-          <p>Publicamos, ajustamos e deixamos pronto para receber pessoas.</p>
-        </div>
+        <a
+          href="https://instagram.com/klyro.web"
+          target="_blank"
+          rel="noopener"
+        >
+          Instagram ↗
+        </a>
       </div>
-    </section>
+    </div>
 
-    <section id="contact" class="contact panel">
-      <div class="contact-copy reveal">
+    <form class="contact-form" action="#" method="post">
+      <div class="form-row">
+        <label for="name">Seu nome</label>
 
-        <h2>Vamos tirar seu site do modo invisível.</h2>
-
+        <input
+          type="text"
+          id="name"
+          name="name"
+          placeholder="Como podemos te chamar?"
+          autocomplete="name"
+          required
+        >
       </div>
 
-      <form id="briefingForm" class="briefing reveal">
-        <input id="nome" placeholder="Nome" required />
-        <input id="negocio" placeholder="Área do negócio" required />
+      <div class="form-row">
+        <label for="email">Seu e-mail</label>
 
-        <select id="tipo">
-          <option>Landing Page</option>
-          <option>Site institucional</option>
-          <option>Portfólio</option>
-          <option>Redesign</option>
-          <option>Não sei ainda</option>
-        </select>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          placeholder="voce@empresa.com.br"
+          autocomplete="email"
+         
+        >
+      </div>
 
-        <select id="prazo">
-          <option>Sem pressa</option>
-          <option>Até 7 dias</option>
-          <option>Até 15 dias</option>
-          <option>Até 30 dias</option>
-        </select>
+      <div class="form-row">
+        <label for="company">Empresa ou projeto</label>
 
-        <textarea id="detalhes" placeholder="Conte o que você quer criar"></textarea>
+        <input
+          type="text"
+          id="company"
+          name="company"
+          placeholder="Nome da marca"
+          autocomplete="organization"
+        >
+      </div>
 
-        <button class="magnetic" type="submit">Solicitar orçamento</button>
-      </form>
-    </section>
+      <div class="form-row">
+        <label>O que você procura?</label>
 
+        <div class="custom-select" data-select>
+          <button
+            class="custom-select-trigger"
+            type="button"
+            aria-haspopup="listbox"
+            aria-expanded="false"
+          >
+            <span>Selecione uma opção</span>
+            <b>⌄</b>
+          </button>
+
+          <div class="custom-select-options" role="listbox">
+            <button type="button" data-value="site-institucional">
+              <span>Site institucional</span>
+              <small>Presença completa para sua empresa</small>
+            </button>
+
+            <button type="button" data-value="landing-page">
+              <span>Landing page</span>
+              <small>Página focada em conversão</small>
+            </button>
+
+            <button type="button" data-value="portfolio">
+              <span>Portfólio</span>
+              <small>Apresente seus melhores trabalhos</small>
+            </button>
+
+            <button type="button" data-value="redesign">
+              <span>Redesign de site</span>
+              <small>Reposicione sua presença digital</small>
+            </button>
+
+            <button type="button" data-value="outro">
+              <span>Outro projeto</span>
+              <small>Conte sua ideia para a gente</small>
+            </button>
+          </div>
+
+          <input type="hidden" id="service" name="service">
+        </div>
+      </div>
+
+      <div class="form-row form-row-full">
+        <label for="message">Conte um pouco sobre o projeto</label>
+
+        <textarea
+          id="message"
+          name="message"
+          rows="5"
+          placeholder="Objetivo, prazo, referências e o que precisa mudar."
+          required
+        ></textarea>
+      </div>
+
+      <div class="form-footer">
+        <p>
+          Respondemos com uma análise inicial do projeto,
+          não com mensagem automática.
+        </p>
+
+        <button type="submit">
+          <span>Enviar projeto</span>
+          <b>↗</b>
+        </button>
+      </div>
+    </form>
+  </div>
+</section>
   </main>
 
-  <footer>
-    <span>KLYRO © 2026</span>
-    <a href="#home">voltar ao topo</a>
+  <footer class="site-footer">
+    <a class="logo" href="#inicio">
+      <span class="logo-symbol">K</span>
+      <span class="logo-name">klyro.web</span>
+    </a>
+
+    <span>Design que constrói percepção.</span>
+    <span>© 2026</span>
   </footer>
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-  <script src="script.js"></script>
 </body>
-
 </html>

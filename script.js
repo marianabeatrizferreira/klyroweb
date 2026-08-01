@@ -1,361 +1,379 @@
-const $ = (selector) => document.querySelector(selector);
-const $$ = (selector) => document.querySelectorAll(selector);
+const body = document.body
+const header = document.querySelector(".site-header")
+const progressBar = document.querySelector(".page-progress span")
+const menuToggle = document.querySelector(".menu-toggle")
+const mobileMenu = document.querySelector(".mobile-menu")
+const mobileMenuLinks = document.querySelectorAll(".mobile-menu a")
+const heroWords = document.querySelectorAll(".hero-word")
+const questionPanels = document.querySelectorAll(".question-panel")
+const projectSections = document.querySelectorAll(".project")
+const processItems = document.querySelectorAll(".process-item")
+const revealTargets = document.querySelectorAll(
+  ".work-intro-top, .work-intro-copy, .project-heading, .project-main-image, .project-details, .process-head, .closing-statement > *, .contact-top, .contact-copy, .contact-footer"
+)
+const prefersReducedMotion = window.matchMedia(
+  "(prefers-reduced-motion: reduce)"
+).matches
 
-const loader = $("#loader");
-const wipe = $("#pageWipe");
-const cursor = $("#cursor");
-const follower = $("#cursorFollower");
+const clamp = (value, min, max) => Math.min(Math.max(value, min), max)
 
-window.addEventListener("load", () => {
-  setTimeout(() => {
-    loader.classList.add("hide");
-    introAnimation();
-  }, 900);
-});
+const updateHeader = () => {
+  header.classList.toggle("scrolled", window.scrollY > 24)
+}
 
-function introAnimation() {
-  const titleLines = $$(".split-title span");
-  titleLines.forEach((line, index) => {
-    line.animate(
-      [
-        { transform: "translateY(110%) rotate(4deg)", opacity: 0 },
-        { transform: "translateY(0) rotate(0)", opacity: 1 }
-      ],
-      {
-        duration: 900,
-        delay: index * 90,
-        easing: "cubic-bezier(.16,1,.3,1)",
-        fill: "both"
+const updateProgress = () => {
+  const documentHeight =
+    document.documentElement.scrollHeight - window.innerHeight
+
+  const progress =
+    documentHeight > 0 ? window.scrollY / documentHeight : 0
+
+  progressBar.style.width = `${progress * 100}%`
+}
+
+const openMenu = () => {
+  body.classList.add("menu-open")
+  menuToggle.classList.add("active")
+  mobileMenu.classList.add("active")
+  menuToggle.setAttribute("aria-expanded", "true")
+  menuToggle.setAttribute("aria-label", "Fechar menu")
+  mobileMenu.setAttribute("aria-hidden", "false")
+}
+
+const closeMenu = () => {
+  body.classList.remove("menu-open")
+  menuToggle.classList.remove("active")
+  mobileMenu.classList.remove("active")
+  menuToggle.setAttribute("aria-expanded", "false")
+  menuToggle.setAttribute("aria-label", "Abrir menu")
+  mobileMenu.setAttribute("aria-hidden", "true")
+}
+
+menuToggle.addEventListener("click", () => {
+  mobileMenu.classList.contains("active") ? closeMenu() : openMenu()
+})
+
+mobileMenuLinks.forEach((link) => {
+  link.addEventListener("click", closeMenu)
+})
+
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Escape") {
+    closeMenu()
+  }
+})
+
+const revealObserver = new IntersectionObserver(
+  (entries) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return
+
+      entry.target.classList.add("is-visible")
+      revealObserver.unobserve(entry.target)
+    })
+  },
+  {
+    threshold: 0.14,
+    rootMargin: "0px 0px -8% 0px"
+  }
+)
+
+revealTargets.forEach((target) => {
+  target.classList.add("reveal")
+  revealObserver.observe(target)
+})
+
+const showHero = () => {
+  heroWords.forEach((word, index) => {
+    window.setTimeout(() => {
+      word.classList.add("is-visible")
+    }, 140 + index * 130)
+  })
+}
+
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", showHero)
+} else {
+  showHero()
+}
+
+const animateQuestionPanels = () => {
+  if (prefersReducedMotion) return
+
+  questionPanels.forEach((panel) => {
+    const rect = panel.getBoundingClientRect()
+    const viewportCenter = window.innerHeight / 2
+    const panelCenter = rect.top + rect.height / 2
+    const distance = panelCenter - viewportCenter
+    const opacity = clamp(
+      1 - Math.abs(distance) / window.innerHeight,
+      0.35,
+      1
+    )
+    const shift = clamp(distance * 0.035, -34, 34)
+
+    panel.style.opacity = opacity
+    panel.style.transform = `translateY(${shift}px)`
+  })
+}
+
+const animateProjects = () => {
+  if (prefersReducedMotion) return
+
+  projectSections.forEach((project, index) => {
+    const image = project.querySelector(".project-main-image")
+    const heading = project.querySelector(".project-heading")
+    const details = project.querySelector(".project-details")
+    const rect = project.getBoundingClientRect()
+    const viewportCenter = window.innerHeight / 2
+    const projectCenter = rect.top + rect.height / 2
+    const distance = projectCenter - viewportCenter
+    const direction = index % 2 === 0 ? 1 : -1
+    const imageShift = clamp(distance * -0.018, -26, 26)
+    const textShift = clamp(distance * 0.014 * direction, -18, 18)
+
+    if (image) {
+      image.style.translate = `0 ${imageShift}px`
+    }
+
+    if (heading) {
+      heading.style.translate = `${textShift}px 0`
+    }
+
+    if (details) {
+      details.style.translate = `${textShift * -0.6}px 0`
+    }
+  })
+}
+
+const addProcessFocus = () => {
+  processItems.forEach((item) => {
+    item.addEventListener("pointerenter", () => {
+      processItems.forEach((otherItem) => {
+        if (otherItem !== item) {
+          otherItem.style.opacity = "0.38"
+        }
+      })
+    })
+
+    item.addEventListener("pointerleave", () => {
+      processItems.forEach((otherItem) => {
+        otherItem.style.opacity = ""
+      })
+    })
+  })
+}
+
+const addMagneticLinks = () => {
+  if (prefersReducedMotion) return
+
+  const links = document.querySelectorAll(
+    ".header-contact, .scroll-link, .contact-copy a"
+  )
+
+  links.forEach((link) => {
+    link.addEventListener("pointermove", (event) => {
+      const rect = link.getBoundingClientRect()
+      const x = event.clientX - rect.left - rect.width / 2
+      const y = event.clientY - rect.top - rect.height / 2
+
+      link.style.transform = `translate(${x * 0.08}px, ${y * 0.08}px)`
+    })
+
+    link.addEventListener("pointerleave", () => {
+      link.style.transform = ""
+    })
+  })
+}
+
+let ticking = false
+
+const updateScrollEffects = () => {
+  if (ticking) return
+
+  ticking = true
+
+  window.requestAnimationFrame(() => {
+    updateHeader()
+    updateProgress()
+    animateQuestionPanels()
+    animateProjects()
+    ticking = false
+  })
+}
+
+window.addEventListener("scroll", updateScrollEffects, {
+  passive: true
+})
+
+window.addEventListener("resize", () => {
+  if (window.innerWidth > 1080) {
+    closeMenu()
+  }
+
+  updateScrollEffects()
+})
+
+window.addEventListener("load", updateScrollEffects)
+
+addProcessFocus()
+addMagneticLinks()
+updateHeader()
+updateProgress()
+
+const projectVideos = document.querySelectorAll(".project-video")
+
+projectVideos.forEach((video) => {
+  video.muted = true
+
+  const playVideo = () => {
+    const playPromise = video.play()
+
+    if (playPromise !== undefined) {
+      playPromise.catch(() => {})
+    }
+  }
+
+  if (video.readyState >= 2) {
+    playVideo()
+  } else {
+    video.addEventListener("loadeddata", playVideo, {
+      once: true
+    })
+  }
+
+  document.addEventListener("visibilitychange", () => {
+    if (document.hidden) {
+      video.pause()
+    } else {
+      playVideo()
+    }
+  })
+})
+
+const customSelects = document.querySelectorAll("[data-select]")
+
+customSelects.forEach((select) => {
+  const trigger = select.querySelector(".custom-select-trigger")
+  const triggerText = trigger.querySelector("span")
+  const options = select.querySelectorAll(
+    ".custom-select-options button"
+  )
+  const hiddenInput = select.querySelector('input[type="hidden"]')
+
+  const closeSelect = () => {
+    select.classList.remove("open")
+    trigger.setAttribute("aria-expanded", "false")
+  }
+
+  trigger.addEventListener("click", () => {
+    const isOpen = select.classList.contains("open")
+
+    customSelects.forEach((otherSelect) => {
+      otherSelect.classList.remove("open")
+
+      const otherTrigger = otherSelect.querySelector(
+        ".custom-select-trigger"
+      )
+
+      if (otherTrigger) {
+        otherTrigger.setAttribute("aria-expanded", "false")
       }
-    );
-  });
-}
+    })
 
-let mouseX = 0;
-let mouseY = 0;
-let followerX = 0;
-let followerY = 0;
-
-window.addEventListener("mousemove", (event) => {
-  mouseX = event.clientX;
-  mouseY = event.clientY;
-
-  cursor.style.left = `${mouseX}px`;
-  cursor.style.top = `${mouseY}px`;
-});
-
-function renderCursor() {
-  followerX += (mouseX - followerX) * 0.12;
-  followerY += (mouseY - followerY) * 0.12;
-
-  follower.style.left = `${followerX}px`;
-  follower.style.top = `${followerY}px`;
-
-  requestAnimationFrame(renderCursor);
-}
-renderCursor();
-
-$$("a, button, .tilt, .magnetic").forEach((element) => {
-  element.addEventListener("mouseenter", () => follower.classList.add("hover"));
-  element.addEventListener("mouseleave", () => follower.classList.remove("hover"));
-});
-
-$$(".magnetic").forEach((element) => {
-  element.addEventListener("mousemove", (event) => {
-    const rect = element.getBoundingClientRect();
-    const x = event.clientX - rect.left - rect.width / 2;
-    const y = event.clientY - rect.top - rect.height / 2;
-    element.style.transform = `translate(${x * 0.18}px, ${y * 0.18}px)`;
-  });
-
-  element.addEventListener("mouseleave", () => {
-    element.style.transform = "translate(0,0)";
-  });
-});
-
-const menuBtn = $("#menuBtn");
-const mobilePanel = $("#mobilePanel");
-
-menuBtn.addEventListener("click", () => {
-  mobilePanel.classList.toggle("open");
-  
-});
-
-$$(".mobile-panel a").forEach((link) => {
-  link.addEventListener("click", () => {
-    mobilePanel.classList.remove("open");
-   
-  });
-});
-
-function smoothTo(target) {
-  const element = document.querySelector(target);
-  if (!element) return;
-
-  wipe.animate(
-    [
-      { transform: "scaleY(0)", transformOrigin: "bottom" },
-      { transform: "scaleY(1)", transformOrigin: "bottom" }
-    ],
-    {
-      duration: 420,
-      easing: "cubic-bezier(.77,0,.18,1)",
-      fill: "forwards"
+    if (!isOpen) {
+      select.classList.add("open")
+      trigger.setAttribute("aria-expanded", "true")
     }
-  ).onfinish = () => {
-    element.scrollIntoView({ behavior: "smooth", block: "start" });
+  })
 
-    setTimeout(() => {
-      wipe.animate(
-        [
-          { transform: "scaleY(1)", transformOrigin: "top" },
-          { transform: "scaleY(0)", transformOrigin: "top" }
-        ],
-        {
-          duration: 520,
-          easing: "cubic-bezier(.77,0,.18,1)",
-          fill: "forwards"
-        }
-      );
-    }, 260);
-  };
-}
+  options.forEach((option) => {
+    option.addEventListener("click", () => {
+      options.forEach((item) => {
+        item.classList.remove("selected")
+      })
 
-$$('a[href^="#"]').forEach((link) => {
-  link.addEventListener("click", (event) => {
-    const href = link.getAttribute("href");
-    if (href.length > 1) {
-      event.preventDefault();
-      smoothTo(href);
+      option.classList.add("selected")
+      triggerText.textContent =
+        option.querySelector("span").textContent
+
+      trigger.classList.add("has-value")
+      hiddenInput.value = option.dataset.value
+
+      hiddenInput.dispatchEvent(
+        new Event("change", {
+          bubbles: true
+        })
+      )
+
+      closeSelect()
+    })
+  })
+
+  document.addEventListener("click", (event) => {
+    if (!select.contains(event.target)) {
+      closeSelect()
     }
-  });
-});
+  })
 
-const reveals = $$(".reveal");
-
-const revealObserver = new IntersectionObserver((entries) => {
-  entries.forEach((entry) => {
-    if (entry.isIntersecting) {
-      entry.target.animate(
-        [
-          { opacity: 0, transform: "translateY(80px) rotate(.6deg)", filter: "blur(8px)" },
-          { opacity: 1, transform: "translateY(0) rotate(0)", filter: "blur(0)" }
-        ],
-        {
-          duration: 850,
-          easing: "cubic-bezier(.16,1,.3,1)",
-          fill: "forwards"
-        }
-      );
-      revealObserver.unobserve(entry.target);
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") {
+      closeSelect()
     }
-  });
-}, { threshold: .18 });
+  })
+})
 
-reveals.forEach((element) => revealObserver.observe(element));
+const contactForm = document.querySelector(".contact-form")
 
-$$(".tilt").forEach((card) => {
-  card.addEventListener("mousemove", (event) => {
-    const rect = card.getBoundingClientRect();
-    const x = (event.clientX - rect.left) / rect.width - .5;
-    const y = (event.clientY - rect.top) / rect.height - .5;
+if (contactForm) {
+  contactForm.addEventListener("submit", (event) => {
+    event.preventDefault()
 
-    card.style.transform = `rotateX(${y * -8}deg) rotateY(${x * 8}deg) scale(1.015)`;
-  });
+    const name = contactForm.querySelector("#name").value.trim()
+    const email = contactForm.querySelector("#email").value.trim()
+    const company = contactForm.querySelector("#company").value.trim()
+    const service = contactForm.querySelector("#service").value.trim()
+    const message = contactForm.querySelector("#message").value.trim()
+    const submitButton = contactForm.querySelector('button[type="submit"]')
+    const buttonText = submitButton.querySelector("span")
+    const selectTrigger = contactForm.querySelector(".custom-select-trigger")
+    const whatsappNumber = 31994430084
+    if (!service) {
+      selectTrigger.focus()
+      selectTrigger.style.borderColor = "#ff7c9b"
 
-  card.addEventListener("mouseleave", () => {
-    card.style.transform = "rotateX(0) rotateY(0) scale(1)";
-  });
-});
+      window.setTimeout(() => {
+        selectTrigger.style.borderColor = ""
+      }, 1800)
 
-const pathFill = $("#motionPathFill");
-const path = $("#motionPath");
-const orb = $("#pathOrb");
+      return
+    }
 
-function updatePath() {
-  if (!pathFill || !path || !orb) return;
+    const whatsappMessage = [
+  "Olá! Vim pelo site da Klyro.web.",
+  "",
+  `Nome: ${name}`,
+  `E-mail: ${email}`,
+  `Empresa ou projeto: ${company || "Não informado"}`,
+  `Serviço: ${service}`,
+  "",
+  "Mensagem:",
+  message
+].join("\n")
+    const whatsappURL = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`
 
-  const projects = document.querySelector(".projects");
-  const pathWrap = document.querySelector(".project-path");
-  const svg = path.closest("svg");
+    submitButton.disabled = true
+    buttonText.textContent = "Preparando conversa..."
 
-  const length = path.getTotalLength();
-  pathFill.style.strokeDasharray = length;
+    window.setTimeout(() => {
+      buttonText.textContent = "Abrindo WhatsApp..."
 
-  const sectionRect = projects.getBoundingClientRect();
-  const pathRect = pathWrap.getBoundingClientRect();
-  const svgRect = svg.getBoundingClientRect();
+      window.open(whatsappURL, "_blank", "noopener,noreferrer")
 
-  const viewportMiddle = window.innerHeight * 0.5;
-
-  let progress = (viewportMiddle - sectionRect.top) / sectionRect.height;
-  progress = Math.min(Math.max(progress, 0), 1);
-
-  pathFill.style.strokeDashoffset = length * (1 - progress);
-
-  const point = path.getPointAtLength(length * progress);
-
-  const x = (point.x / 1200) * svgRect.width;
-  const y = (point.y / 2200) * svgRect.height;
-
-  orb.style.left = `${x + svgRect.left - pathRect.left}px`;
-  orb.style.top = `${y + svgRect.top - pathRect.top}px`;
+      window.setTimeout(() => {
+        buttonText.textContent = "Enviar projeto"
+        submitButton.disabled = false
+      }, 1600)
+    }, 700)
+  })
 }
-
-window.addEventListener("scroll", updatePath);
-window.addEventListener("resize", updatePath);
-updatePath();
-
-window.addEventListener("scroll", () => {
-  const scroll = window.scrollY;
-
-  $$(".sticker").forEach((sticker, index) => {
-    const speed = (index + 1) * .035;
-    sticker.style.transform += ` translateY(${Math.sin(scroll * speed) * 0}px)`;
-  });
-
-  const heroWord = $(".hero-noise-word");
-  if (heroWord) {
-    heroWord.style.transform = `translateY(${scroll * .16}px)`;
-  }
-});
-
-$("#briefingForm").addEventListener("submit", (event) => {
-  event.preventDefault();
-
-  const msg = `
-Olá, Klyro! Quero conversar sobre um projeto.
-
-Nome: ${$("#nome").value}
-Área do negócio: ${$("#negocio").value}
-Tipo de projeto: ${$("#tipo").value}
-Prazo: ${$("#prazo").value}
-
-Detalhes:
-${$("#detalhes").value || "Ainda não descrevi."}
-`.trim();
-
-  window.open(`https://wa.me/5531994430084?text=${encodeURIComponent(msg)}`, "_blank");
-});
-
-function initThree() {
-  const canvas = $("#threeScene");
-  const scene = new THREE.Scene();
-
-  const camera = new THREE.PerspectiveCamera(42, canvas.clientWidth / canvas.clientHeight, 0.1, 100);
-  camera.position.z = 7.4;
-
-  const renderer = new THREE.WebGLRenderer({
-    canvas,
-    alpha: true,
-    antialias: true
-  });
-
-  renderer.setSize(canvas.clientWidth, canvas.clientHeight);
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-
-  const group = new THREE.Group();
-  scene.add(group);
-
-  const purpleMat = new THREE.MeshPhysicalMaterial({
-    color: 0x9b42ff,
-    metalness: .88,
-    roughness: .14,
-    clearcoat: 1,
-    clearcoatRoughness: .04
-  });
-
-  const acidMat = new THREE.MeshPhysicalMaterial({
-    color: 0xff3df2,
-    metalness: .45,
-    roughness: .22,
-    clearcoat: 1
-  });
-
-  const glassMat = new THREE.MeshPhysicalMaterial({
-    color: 0xffffff,
-    transparent: true,
-    opacity: .22,
-    metalness: .1,
-    roughness: .05,
-    transmission: .35,
-    thickness: 1
-  });
-
-  const objects = [];
-
-  function add(mesh, x, y, z, scale) {
-    mesh.position.set(x, y, z);
-    mesh.scale.setScalar(scale);
-    group.add(mesh);
-    objects.push(mesh);
-    return mesh;
-  }
-
- add(new THREE.Mesh(new THREE.BoxGeometry(1.4,1.4,1.4), purpleMat), -1.95,1.2,0,1.35);
-
-add(new THREE.Mesh(new THREE.IcosahedronGeometry(1.1,1), acidMat), 1.5,.8,-.3,1.28);
-
-add(new THREE.Mesh(new THREE.TorusKnotGeometry(.78,.22,180,24), purpleMat), .1,-1.4,.1,1.45);
-
-add(new THREE.Mesh(new THREE.OctahedronGeometry(1.1), glassMat), 2.2,-1.45,-.8,1.02);
-
-add(new THREE.Mesh(new THREE.BoxGeometry(.9,.9,.9), glassMat), -2.7,-1.55,-.5,.92);
-
-const ring = new THREE.Mesh(
- new THREE.TorusGeometry(3.05,.032,16,190),
- acidMat
-);
-  ring.rotation.x = Math.PI / 2.25;
-  group.add(ring);
-
-  const ambient = new THREE.AmbientLight(0xffffff, 1.1);
-  scene.add(ambient);
-
-  const light1 = new THREE.PointLight(0x9b42ff, 4.5, 30);
-  light1.position.set(4, 5, 5);
-  scene.add(light1);
-
-  const light2 = new THREE.PointLight(0xb8ff00, 3.4, 30);
-  light2.position.set(-4, -3, 3);
-  scene.add(light2);
-
-  let mx = 0;
-  let my = 0;
-
-  window.addEventListener("mousemove", (event) => {
-    mx = (event.clientX / window.innerWidth - .5) * 2;
-    my = (event.clientY / window.innerHeight - .5) * 2;
-  });
-
-  const clock = new THREE.Clock();
-
-  function animate() {
-    const elapsed = clock.getElapsedTime();
-
-    group.rotation.y = elapsed * .18 + mx * .28;
-    group.rotation.x = Math.sin(elapsed * .42) * .18 - my * .18;
-    group.position.y = Math.sin(elapsed * .8) * .16;
-
-    objects.forEach((object, index) => {
-      object.rotation.x += .006 + index * .001;
-      object.rotation.y += .009 + index * .001;
-    });
-
-    ring.rotation.z += .006;
-
-    renderer.render(scene, camera);
-    requestAnimationFrame(animate);
-  }
-
-  animate();
-
-  window.addEventListener("resize", () => {
-    camera.aspect = canvas.clientWidth / canvas.clientHeight;
-    camera.updateProjectionMatrix();
-    renderer.setSize(canvas.clientWidth, canvas.clientHeight);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-  });
-}
-
-initThree();
